@@ -1,0 +1,61 @@
+<div class="row p-3 {% if 'detail' in request.path %}justijy-content-center{% endif %}">
+    <div "{% if 'detail' in request.path %}col-sm-6 {% endif %}">
+      {% if contact.manager == request.user %}
+          {% if contact.gender == 'male' %}
+          <div class="card boy-card">
+            {% if contact.image %}
+              <a href="{{contact.image.url}}" class="text-center">
+                <img src="{{contact.image.url}}" class="img-fluid rounded-circle img-thumbnail"/>
+              </a>
+            {% else %}
+              <img src="/static/images/boy.png" class="img-fluid" />
+            {% endif %}
+            <div class="card-header">
+              <a href="{% url 'detail' contact.id %}" class="text-white header-link"><i class="fas fa-mars mr-2"></i> {{contact.id}}--{{contact.name}} </a>
+            </div>
+            <div class="card-body pb-0">
+              <p>
+                <i class="fas fa-at mr-2"></i>
+                <a href="mailto:{{contact.email}}">{{contact.email}}</a>
+              </p>
+              <p>
+                <i class="fas fa-phone-alt mr-2"></i>
+                <a href="tel:9001010100">{{contact.phone}}</a>
+              </p>
+              <p><i class="fas fa-info-circle mr-2"></i> {{contact.info}}</p>
+            </div>
+          </div>
+        {% else %}
+          <div class="card girl-card">
+            {% if contact.image %}
+              <a href="{{contact.image.url}}" class="text-center">
+                <img src="{{contact.image.url}}" class="img-fluid rounded-circle img-thumbnail" />
+              </a>
+            {% else %}
+              <img src="/static/images/girl.png" class="img-fluid" />
+            {% endif %}
+            <div class="card-header">
+              <a href="{% url 'detail' contact.id %}" class="text-white header-link"
+                ><i class="fas fa-venus mr-2"></i> {{contact.id}}--{{contact.name}}</a
+              >
+            </div>
+            <div class="card-body pb-0">
+              <p>
+                <i class="fas fa-at mr-2"></i>
+                <a href="mailto:{{contact.email}}">{{contact.email}}</a>
+              </p>
+              <p>
+                <i class="fas fa-phone-alt mr-2"></i>
+                <a href="tel:{{contact.phone}}">{{contact.phone}}</a>
+              </p>
+              <p><i class="fas fa-info-circle mr-2"></i> {{contact.info}}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="alert alert-danger" role="alert">
+          <strong>Access Denied !!!</strong>
+        </div>
+      {% endif %}
+    </div>
+</div>

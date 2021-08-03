@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>Logout</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h3 class="card-heading text-center">Logged Out</h3>
+        <hr>
+    </div>
+    <div class="container">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>You have been logged out!</strong>
+            </div>
+            <div>
+                <p>
+                    You can login again
+                    <a href="{% url 'login' %}">
+                        <i class="fas fa-hand-point-right"> Here</i>
+                    </a> !
+                </p>
+            </div>
+
+            <script>
+              $(".alert").alert();
+            </script>
+    </div>
+{% endblock content %}

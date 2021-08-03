@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Search result for {{kw}}</title>
+{% endblock %}
+
+{% block content %}
+    <!-- Main Section -->
+    <div class="container">
+      <h3 class="heading font-weight-light">Search results for "{{kw}}"</h3>
+      <small class="text-muted">
+       Number of contacts found:
+      </small>
+      <span class="text-danger font-weight-bold">{{total}}</span>
+      <hr />
+    </div>
+
+    <div class="container main-part">
+      {% if contacts %}
+
+        {% for contact in contacts %}
+          {% if contact.manager == request.user %}
+            {% include 'partials/_card.html' %}
+          {% else %}
+            <div class="alert alert-danger" role="alert">
+              <strong>Access Denied !!!</strong>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="alert alert-warning" role="alert">
+          <strong>
+            <i class="fas fa-angry  fa-2x text-warning px-2"></i>  Nothing to display !
+          </strong>
+        </div>
+      {% endif %}
+    </div>
+    <!-- Main Section ends-->
+  {% endblock %}
+

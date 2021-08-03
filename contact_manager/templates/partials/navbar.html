@@ -1,0 +1,47 @@
+    <!-- Navbar -->
+    <nav class="sticky-top d-block d-md-flex px-4 px-lg-0 py-2 bg-primary">
+        <a class="logo" href="{% url 'index' %}">
+          <i class="fas fa-user-circle"></i>&nbsp;Contacts
+        </a>
+        <p class="feature-link mt-3 m-md-0 p-md-0">
+          {% if not request.user.is_authenticated %}
+              <a href="{% url 'signup' %}" class="text-light px-3">
+                <i class="fas fa-user-plus "> Sign Up</i>
+              </a>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="text-light px-3">
+              <i class="fas fa-sign-out-alt "> Log out</i>
+            </a>
+          <a href="{% url 'create' %}" class="text-light px-3">
+            <i class="fas fa-plus "> Add Contact</i>
+          </a>
+          {% else %}
+            <a href="{% url 'login' %}" class="text-light px-3">
+              <i class="fas fa-sign-in-alt "> Log in</i>
+            </a>
+          {% endif %}
+        </p>
+        <form  method="GET" action="{% url 'search' %}" class="form-group my-2">
+          {% csrf_token %}
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Find contacts..."
+              name="q"
+              value="{% if kw %}{{kw}}{% endif %}"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+        <label class="text-warning text-center font-weight-bold px-1 mt-3 mt-md-0 d-block">
+          <!-- <a href="{{contact.image.url}}">
+            <img class="img-fluid rounded-circle" src="{{contact.image.url}}" alt="{{contact.name}} image" srcset="">
+          </a> -->
+          {% include 'user/user.html' %}
+        </label>
+      </nav>
+      <!-- Navbar ends -->

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    {% include 'partials/-messages.html' %}
+<div class="container">
+    <h3 class="card-heading text-center">Delete {{contact.name}} ?</h3>
+    <hr>
+    <div class="row justify-content-center">
+        {% if contact.manager == request.user %}
+            <div class="d-flex justify-content-center col-md-10 shadow-lg">
+                <form class="py-5" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <input class="btn btn-block btn-lg btn-danger" type="submit" value="Delete">
+                </form>
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Access Denied !!!</strong>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
